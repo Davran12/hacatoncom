@@ -3,6 +3,19 @@ import inst from "./assets/inst.png"
 import whatsapp from "./assets/whatsapp.png"
 import youtube from "./assets/youtube.png"
 import logo from "./assets/LOGO-1-1.png"
+import хир from "./assets/хир.jpg"
+import хир2 from "./assets/хир2.jpg"
+import pngegg from "./assets/pngegg.png"
+import calling from "./assets/calling.png"
+import photo1 from "./assets/1.png"
+import photo2 from "./assets/2.png"
+import photo3 from "./assets/3.png"
+import photo4 from "./assets/4.png"
+import pediator from "./assets/pediator.jpeg"
+import osteopat from "./assets/osteopat.jpeg"
+import sleth from "./assets/steth.jpg"
+import uslugnog from "./assets/uslugnog.jpeg"
+import "./style.css"
 const NavBar = () => {
   return (
     <div>
@@ -30,7 +43,7 @@ const NavBar = () => {
             </div>
             <div class="contact-info">
               <div class="contact-item">
-                <img src="./assets/pngegg (3).png" alt="" />
+                <img src={pngegg} alt="" />
                 <p>
                   Email
                   <br />
@@ -38,7 +51,7 @@ const NavBar = () => {
                 </p>
               </div>
               <div class="contact-item">
-                <img src="./assets/free-icon-calling-10969810.png" alt="" />
+                <img src={calling} alt="" />
                 <p>
                   Позвонить Нам
                   <br />
@@ -52,13 +65,13 @@ const NavBar = () => {
         <nav class="main-nav">
           <ul>
             <li>
-              <a href="#">Главная</a>
+              <a href="/">Главная</a>
             </li>
             <li>
               <a href="#">О нас</a>
             </li>
             <li>
-              <a href="./uslug.html">Услуги</a>
+              <a href={"/uslug"}>Услуги</a>
             </li>
             <li>
               <a href="#">Хирургия</a>
@@ -67,7 +80,7 @@ const NavBar = () => {
               <a href="#">Кардиология</a>
             </li>
             <li>
-              <a href="#">Врачи</a>
+              <a href={"/doctor"}>Врачи</a>
             </li>
             <li>
               <a href="#">Чекапы</a>
@@ -81,22 +94,21 @@ const NavBar = () => {
           </ul>
         </nav>
       </header>
-
       <div class="slider">
         <div class="slide">
-          <img src="./assets/хир2.jpg" alt="Медицинский фон" />
+          <img src={хир2} alt="Медицинский фон" />
           <div class="slide-content">
             <h2>Пройдите Комплексный Осмотр Здоровья</h2>
             <p>Качественные и быстрые чекапы по доступным ценам в Бишкеке</p>
-            <img src="./assets/хир.jpg" alt="Логотип" class="logo" />
+            <img src={хир} alt="Логотип" class="logo" />
           </div>
         </div>
         <div class="slide">
-          <img src="./assets/хир.jpg" alt="Медицинский фон" />
+          <img src={хир} alt="Медицинский фон" />
           <div class="slide-content">
             <h2>Пройдите Комплексный Осмотр Здоровья</h2>
             <p>Качественные и быстрые чекапы по доступным ценам в Бишкеке</p>
-            <img src="./assets/хир2.jpg" alt="Логотип" class="logo" />
+            <img src={хир2} alt="Логотип" class="logo" />
           </div>
         </div>
         <button class="prev" onclick="prevSlide()">
@@ -113,7 +125,7 @@ const NavBar = () => {
             <div class="advantage">
               <img
                 class="img1"
-                src="./images/1.png"
+                src={photo1}
                 alt="Высококвалифицированные специалисты"
               />
               <h2>Высококвалифицированные специалисты</h2>
@@ -125,7 +137,7 @@ const NavBar = () => {
             <div class="advantage">
               <img
                 class="img2"
-                src="./images/2.png"
+                src={photo2}
                 alt="Современное оборудование и технологии"
               />
               <h2>Современное оборудование и технологии</h2>
@@ -139,7 +151,7 @@ const NavBar = () => {
             <div class="advantage">
               <img
                 class="img3"
-                src="./images/3.png"
+                src={photo3}
                 alt="Индивидуальный подход к каждому пациенту"
               />
               <h2>Индивидуальный подход к каждому пациенту</h2>
@@ -153,7 +165,7 @@ const NavBar = () => {
             <div class="advantage">
               <img
                 class="img4"
-                src="./images/4.png"
+                src={photo4}
                 alt="Безопасная и комфортная обстановка"
               />
               <h2>Безопасная и комфортная обстановка</h2>
@@ -171,25 +183,22 @@ const NavBar = () => {
         <h1>Предоставляемые Услуги</h1>
         <div class="services">
           <div class="service">
-            <img src="./images/osteopat.jpeg" alt="Остеопат" />
+            <img src={osteopat} alt="Остеопат" />
             <p>Лучший сервис по низкой цене</p>
             <h2>ОСТЕОПАТ</h2>
           </div>
           <div class="service">
-            <img src="./images/pediatricsImg-1-1536x1024.jpeg" alt="Педиатр" />
+            <img src={pediator} alt="Педиатр" />
             <p>Лучший сервис по низкой цене</p>
             <h2>ПЕДИАТР</h2>
           </div>
           <div class="service">
-            <img
-              src="./images/doctor-with-stethoscope-hands-hospital-background-1536x1024.jpg"
-              alt="Лор"
-            />
+            <img src={sleth} alt="Лор" />
             <p>Лучший сервис по низкой цене</p>
             <h2>ЛОР</h2>
           </div>
           <div class="service">
-            <img src="./images/Dd4VDd6V4AABZKs.jpeg" alt="" />
+            <img src={uslugnog} alt="" />
             <p>Лучший сервис по низкой цене</p>
             <h2>ЭЛЕКТРОФОРЕЗ И МАГНИТОТЕРАПИЯ</h2>
           </div>
