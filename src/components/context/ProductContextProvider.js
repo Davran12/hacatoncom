@@ -1,81 +1,91 @@
 import axios from "axios"
-import React, {createContext, useContext, useReducer} from "react"
-import {useNavigate} from "react-router-dom"
+import {createContext, useContext, useReducer} from "react"
+import {useLocation, useNavigate} from "react-router-dom"
+import {API} from "../../helpers/const"
 
-export const productContext = createContext()
-export const useProducts = useContext(productContext)
+const productContext = createContext()
+export const useProducts = () => useContext(productContext)
+
 const ProductContextProvider = ({children}) => {
-  const navigate = useNavigate()
   const INIT_STATE = {
-    product: [],
-    oneproduct: {},
+    products: [],
+    oneProduct: null,
   }
+
   const reducer = (state = INIT_STATE, action) => {
     switch (action.type) {
-      case "GET_PRODUCT":
-        return {...state, product: action.payload}
+      case "GET_PRODUCTS":
+        return {...state, products: action.payload}
+      case "GET_ONE_PRODUCT":
+        return {...state, oneProduct: action.payload}
+      default:
+        return state
     }
   }
+
   const [state, dispatch] = useReducer(reducer, INIT_STATE)
-  //   ! Config
-  const getConfig = () => {
-    const tokens = JSON.parse(localStorage.getItem(""))
-    const Authorization = `Bearer ${tokens}`
-    const config = {
-      headers: {Authorization},
-    }
-    return config
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  // ! create
+  const addProduct = async (newProd) => {
+    console.log("Adding product:", newProd)
+    await axios.post(API, newProd)
+    getProducts()
   }
-  //   ! ADDPRODUCT
-  const addProduct = async (product) => {
-    try {
-      const {data} = await axios.post()
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  //   ! GETPRODUCT
-  const getProduct = async () => {
-    const {data} = await axios()
+
+  // ! get
+  const getProducts = async () => {
+    const {data} = await axios(`${API}/${window.location.search}`)
     dispatch({
-      type: "GET_PRODUCT",
-      payload: data.results,
+      type: "GET_PRODUCTS",
+      payload: data,
     })
   }
-  //   ! DELETE
-  const deleteProduct = async (id) => {
-    try {
-      await axios.delete()
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  //   ! GETONEPRODUCT
+
+  //! GETONEPRODUCT
   const getOneProduct = async (id) => {
-    try {
-      const {data} = await axios()
-      dispatch({
-        type: "GET_ONE_PRODUCT",
-        payload: data,
-      })
-    } catch (error) {
-      console.log(error)
-    }
+    const {data} = await axios(`${API}/${id}`)
+    dispatch({
+      type: "GET_ONE_PRODUCT",
+      payload: data,
+    })
   }
-  //   ! EDIT
-  const editProduct = async (id, newProduct) => {
-    try {
-      await axios.patch()
-    } catch (error) {
-      console.log(error)
-    }
+
+  // ! edit
+  const editProduct = async (editedProduct) => {
+    await axios.patch(`${API}/${editedProduct.id}`, editedProduct)
+    getProducts()
   }
+
+  // ! delete
+  const deleteProduct = async (id) => {
+    await axios.delete(`${API}/${id}`)
+    getProducts()
+  }
+
+  function fetchByParams(query, value) {
+    const paramsFromUrl = new URLSearchParams(location.search)
+    if (value === "all") {
+      paramsFromUrl.delete(query)
+    } else {
+      paramsFromUrl.set(query, value)
+    }
+    const url = `${location.pathname}?${paramsFromUrl.toString()}`
+    navigate(url)
+  }
+
   const values = {
+    fetchByParams,
     addProduct,
-    getProduct,
-    deleteProduct,
+    getProducts,
+    products: state.products,
     getOneProduct,
+    oneProduct: state.oneProduct,
+    editProduct,
+    deleteProduct,
   }
+
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>
   )
